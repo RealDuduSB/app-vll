@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1001240505166",
+    "project_id": "beautee-app",
+    "storage_bucket": "beautee-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001240505166:android:85f972a36cb08896b44c1f",
+        "android_client_info": {
+          "package_name": "com.beautee.sbsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1001240505166-qmmpg9vjmhh9304iqq8bn3elhrltfev6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.beautee.sbsapp",
+            "certificate_hash": "b4f1131702c1b440a5c52134445a9e2fdbd02ec7"
+          }
+        },
+        {
+          "client_id": "1001240505166-md4n5cmprg9blbqvvhttrtl3viqlc198.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQeCnACHubRC11cG0JG-k2skm6ghEXIB0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1001240505166-md4n5cmprg9blbqvvhttrtl3viqlc198.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+  
+}
