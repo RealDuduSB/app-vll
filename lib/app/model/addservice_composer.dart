@@ -29,7 +29,30 @@ class _AddServiceComposerState extends State<AddServiceComposer> {
   final _controller = AddServiceController();
   final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
       GlobalKey<ScaffoldMessengerState>();
+  List<String> items = ['Categoria', 'Mãos e pés', 'Pele', 'Cabelo'];
+  String categoria = 'Categoria    ';
 
+  List<String> items2 = [
+    'Especialidade',
+    'Manicure e pedicure',
+    'Esteticista',
+    'Corte masculino',
+    'Corte feminino',
+    'Corte infantil'
+  ];
+  String especialidade = 'Especialidade';
+
+  List<String> items3 = [
+    'Tempo    ',
+    'até 20 min',
+    '20 min a 30 min',
+    '30 min a 40 min',
+    '40 min a 50 min',
+    '50 min a 60 min',
+    '1h a 1:30',
+  ];
+
+  String tempo = 'Tempo    ';
   final FirebaseAuth _auth = FirebaseAuth.instance;
   _getCurrentUser() async {
     // ignore: await_only_futures
@@ -64,42 +87,99 @@ class _AddServiceComposerState extends State<AddServiceComposer> {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Divider(),
           Container(
-            child: TextFormField(
-              controller: _controller.controllerTextcategoria,
-              decoration: InputDecoration(
-                labelText: "Categoria. Ex: Mãos/Pés, Cabelo...",
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red, width: 5.0),
+            child: SizedBox(
+              width: 240,
+              child: DropdownButton<String>(
+                value: categoria,
+                icon: const Icon(Icons.arrow_drop_down),
+                elevation: 16,
+                style: const TextStyle(color: Colors.black),
+                underline: Container(
+                  height: 2,
+                  color: Colors.black,
                 ),
+                items: items
+                    .map((item) => DropdownMenuItem(
+                        value: item,
+                        child: Text(
+                          item,
+                          style: GoogleFonts.lato(
+                              fontSize: 24.0, color: Colors.black),
+                        )))
+                    .toList(),
+                onChanged: (item) => setState(() => categoria = item),
               ),
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(25),
-              ],
-              validator: (String val) {
-                if (val == null || val.isEmpty) {
-                  return "Por favor informe sua Categoria";
-                }
-                return null;
-              },
+            ),
+          ),
+          SizedBox(
+            width: 240,
+            child: Container(
+              child: DropdownButton<String>(
+                value: especialidade,
+                icon: const Icon(Icons.arrow_drop_down),
+                elevation: 16,
+                style: const TextStyle(color: Colors.black),
+                underline: Container(
+                  height: 2,
+                  color: Colors.black,
+                ),
+                items: items2
+                    .map((item2) => DropdownMenuItem(
+                        value: item2,
+                        child: Text(
+                          item2,
+                          style: GoogleFonts.lato(
+                              fontSize: 24.0, color: Colors.black),
+                        )))
+                    .toList(),
+                onChanged: (item2) => setState(() => especialidade = item2),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 240,
+            child: Container(
+              child: DropdownButton<String>(
+                value: tempo,
+                icon: const Icon(Icons.arrow_drop_down),
+                elevation: 16,
+                style: const TextStyle(color: Colors.black),
+                underline: Container(
+                  height: 2,
+                  color: Colors.black,
+                ),
+                items: items3
+                    .map((item3) => DropdownMenuItem(
+                        value: item3,
+                        child: Text(
+                          item3,
+                          style: GoogleFonts.lato(
+                              fontSize: 24.0, color: Colors.black),
+                        )))
+                    .toList(),
+                onChanged: (item3) => setState(() => tempo = item3),
+              ),
             ),
           ),
           Divider(),
           Container(
             child: TextFormField(
-              controller: _controller.controllerTextespecialidade,
+              controller: _controller.controllerTextvalor,
               decoration: InputDecoration(
-                labelText: "Especialidade. Ex: Manucure e pedicur ...",
+                labelText: "Preço \$",
                 border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.red, width: 5.0),
                 ),
               ),
+              keyboardType: TextInputType.number,
               inputFormatters: [
                 LengthLimitingTextInputFormatter(25),
               ],
               validator: (String val) {
                 if (val == null || val.isEmpty) {
-                  return "Por favor informe sua especialidade";
+                  return "Por favor informe o preço";
                 }
                 return null;
               },
@@ -195,51 +275,6 @@ class _AddServiceComposerState extends State<AddServiceComposer> {
             ),
           ),
           Divider(),
-          Container(
-            child: TextFormField(
-              maxLength: 3,
-              controller: _controller.controllerTexttempo,
-              decoration: InputDecoration(
-                labelText: "Tempo em minutos(Ex: 30, 40, 60...)",
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red, width: 5.0),
-                ),
-              ),
-              keyboardType: TextInputType.number,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(3),
-              ],
-              validator: (String val) {
-                if (val == null || val.isEmpty) {
-                  return "Por favor informe o tempo";
-                }
-                return null;
-              },
-            ),
-          ),
-          Divider(),
-          Container(
-            child: TextFormField(
-              controller: _controller.controllerTextvalor,
-              decoration: InputDecoration(
-                labelText: "Preço \$",
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red, width: 5.0),
-                ),
-              ),
-              keyboardType: TextInputType.number,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(25),
-              ],
-              validator: (String val) {
-                if (val == null || val.isEmpty) {
-                  return "Por favor informe o preço";
-                }
-                return null;
-              },
-            ),
-          ),
-          Divider(),
           OutlinedButton(
               child: Text(
                 "Publicar",
@@ -250,9 +285,11 @@ class _AddServiceComposerState extends State<AddServiceComposer> {
                   ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Serviço publicado com sucesso")));
                   widget.sendService(
-                    categoria: _controller.controllerTextcategoria.text,
-                    especialidade: _controller.controllerTextespecialidade.text,
-                    tempo: _controller.controllerTexttempo.text,
+                    categoria: _controller.controllerTextcategoria.text =
+                        categoria,
+                    especialidade: _controller
+                        .controllerTextespecialidade.text = especialidade,
+                    tempo: _controller.controllerTexttempo.text = tempo,
                     valor: _controller.controllerTextvalor.text,
                     bairro: _controller.controllerTextBairro.text,
                     rua: _controller.controllerTextRua.text,
@@ -289,3 +326,68 @@ Future<Todo> _estados() async {
   return todo;
 }
  */
+/*
+          Container(
+            child: TextFormField(
+              controller: _controller.controllerTextcategoria,
+              decoration: InputDecoration(
+                labelText: "Categoria. Ex: Mãos/Pés, Cabelo...",
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red, width: 5.0),
+                ),
+              ),
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(25),
+              ],
+              validator: (String val) {
+                if (val == null || val.isEmpty) {
+                  return "Por favor informe sua Categoria";
+                }
+                return null;
+              },
+            ),
+          ),
+          
+          Container(
+            child: TextFormField(
+              controller: _controller.controllerTextespecialidade,
+              decoration: InputDecoration(
+                labelText: "Especialidade. Ex: Manucure e pedicur ...",
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red, width: 5.0),
+                ),
+              ),
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(25),
+              ],
+              validator: (String val) {
+                if (val == null || val.isEmpty) {
+                  return "Por favor informe sua especialidade";
+                }
+                return null;
+              },
+            ),
+          ),
+          Container(
+            child: TextFormField(
+              maxLength: 3,
+              controller: _controller.controllerTexttempo,
+              decoration: InputDecoration(
+                labelText: "Tempo em minutos(Ex: 30, 40, 60...)",
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red, width: 5.0),
+                ),
+              ),
+              keyboardType: TextInputType.number,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(3),
+              ],
+              validator: (String val) {
+                if (val == null || val.isEmpty) {
+                  return "Por favor informe o tempo";
+                }
+                return null;
+              },
+            ),
+          ),
+*/
