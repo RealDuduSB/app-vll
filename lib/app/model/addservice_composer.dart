@@ -2,8 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sbs_app/controller/addservice_controller.dart';
-import 'package:sbs_app/pages/home_page.dart';
+import '../controller/addservice_controller.dart';
+import '../pages/home_page.dart';
+import 'package:http/http.dart' as http;
 
 // ignore: must_be_immutable
 class AddServiceComposer extends StatefulWidget {
@@ -261,7 +262,7 @@ class _AddServiceComposerState extends State<AddServiceComposer> {
                   );
                   Navigator.pop(
                     context,
-                    MaterialPageRoute(builder: (context) => MainPage()),
+                    MaterialPageRoute(builder: (context) => HomePage()),
                   );
                 }
               }),
@@ -270,3 +271,21 @@ class _AddServiceComposerState extends State<AddServiceComposer> {
     );
   }
 }
+
+/*
+
+class Todo {
+  final int id;
+
+  Todo({this.id});
+}
+
+Future<Todo> _estados() async {
+  var url =
+      'https://servicodados.ibge.gov.br/api/v1/localidades/estados/11|12|13|14|15|16|17|21|22|23|24|25|26|27|28|29|31|32|33|35|41|42|43|50|51|52|53';
+  var response = await http.get(Uri.parse(url));
+  var json = jsonDecode(response.body);
+  var todo = Todo(id: json['id']);
+  return todo;
+}
+ */

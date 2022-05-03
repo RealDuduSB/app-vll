@@ -140,7 +140,7 @@ class _LoginState extends State<Login> {
         await user.sendEmailVerification();
       }
       Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-        return MainPage(
+        return HomePage(
           user: user,
         );
       }));

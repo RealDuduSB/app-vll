@@ -108,10 +108,11 @@ class _RegistrarState extends State<Registrar> {
       }
       // ignore: deprecated_member_use
       await user.updateProfile(displayName: _controller.displayName.text);
+
       final user1 = _controller.auth.currentUser;
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (context) {
-        return MainPage(
+        return HomePage(
           user: user1,
         );
       }));

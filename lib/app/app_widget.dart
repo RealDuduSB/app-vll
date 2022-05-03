@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sbs_app/pages/login_page.dart';
+import 'package:sbs_app/app/pages/login_page.dart';
 
 class MyApp extends StatelessWidget {
   @override

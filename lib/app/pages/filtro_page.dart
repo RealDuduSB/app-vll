@@ -129,22 +129,6 @@ class _FiltroPageState extends State<FiltroPage> {
               Row(
                 children: [
                   Text("Estado: "),
-/*                  DropdownButton(
-                    hint: Text("Estado"),
-                    value: valueChoice,
-                    onChanged: (newValue) {
-                      setState(() {
-                        valueChoice = newValue;
-                      });
-                    },
-/*                    items: listaEstados.length((valueItem) {
-                      return DropdownMenuItem(
-                        value: valueItem,
-                        child: Text(valueItem),
-                      );
-                    }),*/
-                  )
-                  */
                 ],
               )
             ],

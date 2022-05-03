@@ -2,23 +2,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sbs_app/pages/addservice_page.dart';
-import 'package:sbs_app/pages/filtro_page.dart';
-import 'package:sbs_app/pages/meusservicos_page.dart';
-import 'package:sbs_app/pages/user_page.dart';
+import 'package:sbs_app/app/pages/filtro_page.dart';
+import 'package:sbs_app/app/pages/myservices_page.dart';
+import 'package:sbs_app/app/pages/testehttp.dart';
+import 'package:sbs_app/app/pages/user_page.dart';
+import 'addservice_page.dart';
 
-class MainPage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   final User user;
 
-  const MainPage({Key key, this.user}) : super(key: key);
+  const HomePage({Key key, this.user}) : super(key: key);
   @override
-  _MainPageState createState() => _MainPageState();
+  _HomePageState createState() => _HomePageState();
 }
 
 CollectionReference services =
     FirebaseFirestore.instance.collection('services');
 
-class _MainPageState extends State<MainPage> {
+class _HomePageState extends State<HomePage> {
   final pageViewController = PageController();
 
   Future getServices() async {
@@ -43,11 +44,11 @@ class _MainPageState extends State<MainPage> {
             UserAccountsDrawerHeader(
                 decoration: BoxDecoration(color: Colors.black),
                 accountName: Text(
-                  "Nome: " + widget.user.displayName,
+                  "Nome: ${widget.user.displayName}",
                   style: GoogleFonts.lato(fontSize: 16),
                 ),
                 accountEmail: Text(
-                  "email: " + widget.user.email,
+                  "email: ${widget.user.email}",
                   style: GoogleFonts.lato(fontSize: 16),
                 )),
             ListTile(
@@ -81,7 +82,20 @@ class _MainPageState extends State<MainPage> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => UserPage()),
+                  MaterialPageRoute(
+                      builder: (context) => UserPage(user: widget.user)),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.person, color: Colors.black),
+              title: Text("Teste http",
+                  style: GoogleFonts.lato(fontSize: 27, color: Colors.black)),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TestHttp(user: widget.user)),
                 );
               },
             ),

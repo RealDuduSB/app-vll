@@ -10,31 +10,14 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  _getCurrentUser() async {
-    // ignore: await_only_futures
-    final User user = await _auth.currentUser;
-    final uid = user.uid;
-    // Similarly we can get email as well
-    //final uemail = user.email;
-    print(uid);
-    //print(uemail);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Usuario" + widget.user.displayName),
+          title: Text("Usuario"),
         ),
-        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Container(
-              child: OutlinedButton(
-            onPressed: () {
-              _getCurrentUser();
-            },
-            child: Text('Details'),
-          )),
-        ]));
+        body: Center(
+            child:
+                Container(child: Text("Usuário: ${widget.user.displayName}"))));
   }
 }

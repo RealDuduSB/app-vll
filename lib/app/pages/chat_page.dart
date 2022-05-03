@@ -5,7 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:sbs_app/model/text_composer.dart';
+
+import '../model/text_composer.dart';
 
 class ChatField extends StatefulWidget {
   final User user;
@@ -18,12 +19,10 @@ class ChatField extends StatefulWidget {
 class _ChatFieldState extends State<ChatField> {
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
-
   CollectionReference messages =
       FirebaseFirestore.instance.collection('messages');
 
   void _sendMessage({String text, File img}) async {
-    
     Map<String, dynamic> data = {};
 
     if (img != null) {
@@ -44,8 +43,6 @@ class _ChatFieldState extends State<ChatField> {
 
   @override
   Widget build(BuildContext context) {
-    
-    
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
