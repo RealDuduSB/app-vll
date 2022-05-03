@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sbs_app/app/model/todo_add_model.dart';
 import '../controller/addservice_controller.dart';
 import '../pages/home_page.dart';
 import 'package:http/http.dart' as http;
@@ -15,6 +16,7 @@ class AddServiceComposer extends StatefulWidget {
       String especialidade,
       String tempo,
       String valor,
+      String estado,
       String cidade,
       String bairro,
       String rua,
@@ -30,7 +32,7 @@ class _AddServiceComposerState extends State<AddServiceComposer> {
   final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
       GlobalKey<ScaffoldMessengerState>();
   List<String> items = ['Categoria', 'Mãos e pés', 'Pele', 'Cabelo'];
-  String categoria = 'Categoria    ';
+  String categoria = 'Categoria';
 
   List<String> items2 = [
     'Especialidade',
@@ -43,7 +45,7 @@ class _AddServiceComposerState extends State<AddServiceComposer> {
   String especialidade = 'Especialidade';
 
   List<String> items3 = [
-    'Tempo    ',
+    'Tempo',
     'até 20 min',
     '20 min a 30 min',
     '30 min a 40 min',
@@ -52,7 +54,7 @@ class _AddServiceComposerState extends State<AddServiceComposer> {
     '1h a 1:30',
   ];
 
-  String tempo = 'Tempo    ';
+  String tempo = 'Tempo';
   final FirebaseAuth _auth = FirebaseAuth.instance;
   _getCurrentUser() async {
     // ignore: await_only_futures
@@ -163,7 +165,6 @@ class _AddServiceComposerState extends State<AddServiceComposer> {
               ),
             ),
           ),
-          Divider(),
           Container(
             child: TextFormField(
               controller: _controller.controllerTextvalor,
@@ -175,11 +176,32 @@ class _AddServiceComposerState extends State<AddServiceComposer> {
               ),
               keyboardType: TextInputType.number,
               inputFormatters: [
-                LengthLimitingTextInputFormatter(25),
+                LengthLimitingTextInputFormatter(6),
               ],
               validator: (String val) {
                 if (val == null || val.isEmpty) {
                   return "Por favor informe o preço";
+                }
+                return null;
+              },
+            ),
+          ),
+          Divider(),
+          Container(
+            child: TextFormField(
+              controller: _controller.controllerTextEstado,
+              decoration: InputDecoration(
+                labelText: "Estado (Apenas sigla)",
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red, width: 5.0),
+                ),
+              ),
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(2),
+              ],
+              validator: (String val) {
+                if (val == null || val.isEmpty) {
+                  return "Por favor informe o ESTADO";
                 }
                 return null;
               },
@@ -294,6 +316,7 @@ class _AddServiceComposerState extends State<AddServiceComposer> {
                     bairro: _controller.controllerTextBairro.text,
                     rua: _controller.controllerTextRua.text,
                     numeroCasa: _controller.controllerTextNumeroCasa.text,
+                    estado: _controller.controllerTextEstado.text,
                     cidade: _controller.controllerTextCidade.text,
                     userId: await _getCurrentUser(),
                   );

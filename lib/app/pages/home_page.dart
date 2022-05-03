@@ -2,9 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sbs_app/app/pages/filtro_page.dart';
+import 'package:sbs_app/app/pages/chat_page.dart';
 import 'package:sbs_app/app/pages/myservices_page.dart';
-import 'package:sbs_app/app/pages/testehttp.dart';
 import 'package:sbs_app/app/pages/user_page.dart';
 import 'addservice_page.dart';
 
@@ -87,18 +86,6 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
-            ListTile(
-              leading: Icon(Icons.person, color: Colors.black),
-              title: Text("Teste http",
-                  style: GoogleFonts.lato(fontSize: 27, color: Colors.black)),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => TestHttp(user: widget.user)),
-                );
-              },
-            ),
           ],
         ),
       ),
@@ -109,10 +96,10 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => FiltroPage()),
+                  MaterialPageRoute(builder: (context) => ChatField()),
                 );
               },
-              icon: Icon(Icons.search))
+              icon: Icon(Icons.chat))
         ],
       ),
       body: Container(
@@ -121,6 +108,21 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Row(
+              children: [
+                Container(
+                    padding: EdgeInsets.all(10),
+                    height: 70,
+                    width: 250,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Pesquisa",
+                        prefixIcon: Icon(Icons.search),
+                      ),
+                    )),
+              ],
+            ),
             Expanded(
                 child: StreamBuilder(
               stream:

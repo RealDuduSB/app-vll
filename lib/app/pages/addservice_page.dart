@@ -25,6 +25,7 @@ class _AddServicePageState extends State<AddServicePage> {
       String especialidade,
       String tempo,
       String valor,
+      String estado,
       String cidade,
       String bairro,
       String rua,
@@ -37,6 +38,7 @@ class _AddServicePageState extends State<AddServicePage> {
     if (tempo != null) data['tempo'] = tempo;
     if (valor != null) data['valor'] = valor;
     if (userId != null) data['userId'] = userId;
+    if (estado != null) data['estado'] = estado;
     if (cidade != null) data['cidade'] = cidade;
     if (bairro != null) data['bairro'] = bairro;
     if (rua != null) data['rua'] = rua;
