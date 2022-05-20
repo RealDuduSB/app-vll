@@ -57,10 +57,7 @@ class _HomePageState extends State<HomePage> {
                 style: GoogleFonts.lato(fontSize: 27, color: Colors.black),
               ),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AddServicePage()),
-                );
+                Navigator.of(context).pushNamed('/addService');
               },
             ),
             ListTile(
@@ -68,10 +65,7 @@ class _HomePageState extends State<HomePage> {
               title: Text("Meus serviços",
                   style: GoogleFonts.lato(fontSize: 27, color: Colors.black)),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MeusServicos()),
-                );
+                Navigator.of(context).pushNamed('/meusServicos');
               },
             ),
             ListTile(
@@ -94,10 +88,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ChatField()),
-                );
+                Navigator.of(context).pushNamed('/chat');
               },
               icon: Icon(Icons.chat))
         ],

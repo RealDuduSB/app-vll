@@ -107,7 +107,6 @@ class _LoginState extends State<Login> {
               Container(
                 padding: const EdgeInsets.only(top: 16),
                 alignment: Alignment.center,
-                // ignore: missing_required_param
                 child: OutlinedButton(
                   child: Text(
                     "ENTRAR",
@@ -192,4 +191,20 @@ void _push(BuildContext context, Widget page) {
                   ],
                 ),
               ),
+
+              
+void _handleFirebaseLoginWithCredentialsException(
+    FirebaseAuthException e, StackTrace s) {
+  if (e.code == 'user-disabled') {
+    //'O usuário informado está desabilitado.'
+  } else if (e.code == 'user-not-found') {
+    //'O usuário informado não está cadastrado.'
+  } else if (e.code == 'invalid-email') {
+    //'O domínio do e-mail informado é inválido.'
+  } else if (e.code == 'wrong-password') {
+    //'A senha informada está incorreta.'
+  } else {
+    //Outro problema
+  }
+}
 */

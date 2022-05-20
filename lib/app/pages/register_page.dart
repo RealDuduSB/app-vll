@@ -97,25 +97,35 @@ class _RegistrarState extends State<Registrar> {
   }
 
   void _registerAcount() async {
-    final User user = (await _controller.auth.createUserWithEmailAndPassword(
-            email: _controller.emailController.text,
-            password: _controller.senhaController.text))
-        .user;
+    try {
+      final User user = (await _controller.auth.createUserWithEmailAndPassword(
+              email: _controller.emailController.text,
+              password: _controller.senhaController.text))
+          .user;
 
-    if (user != null) {
-      if (user.emailVerified) {
-        await user.sendEmailVerification();
+      if (user != null) {
+        if (user.emailVerified) {
+          await user.sendEmailVerification();
+        }
+        // ignore: deprecated_member_use
+        await user.updateProfile(displayName: _controller.displayName.text);
+
+        final user1 = _controller.auth.currentUser;
+        Navigator.of(context)
+            .pushReplacement(MaterialPageRoute(builder: (context) {
+          return HomePage(
+            user: user1,
+          );
+        }));
       }
-      // ignore: deprecated_member_use
-      await user.updateProfile(displayName: _controller.displayName.text);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Erro ao efetuar o registro"),
+      ));
 
-      final user1 = _controller.auth.currentUser;
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) {
-        return HomePage(
-          user: user1,
-        );
-      }));
+      print(e);
     }
   }
 }
+
+class erroCadastro implements Exception {}

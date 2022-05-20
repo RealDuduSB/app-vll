@@ -169,6 +169,7 @@ class _AddServiceComposerState extends State<AddServiceComposer> {
             child: TextFormField(
               controller: _controller.controllerTextvalor,
               decoration: InputDecoration(
+                prefixText: 'R\$',
                 labelText: "Preço \$",
                 border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.red, width: 5.0),

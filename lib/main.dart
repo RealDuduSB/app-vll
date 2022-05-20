@@ -8,12 +8,3 @@ Future<void> main() async {
   await Firebase.initializeApp();
   runApp(MyApp());
 }
-
-/*
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MyApp());
-}
-
- */
