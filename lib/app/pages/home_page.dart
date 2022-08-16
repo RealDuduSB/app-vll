@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.of(context).pushNamed('/chat');
+                Navigator.of(context).pushNamed('/chatlist');
               },
               icon: Icon(Icons.chat))
         ],
@@ -145,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                                         Text(
                                           docs[index].get('categoria'),
                                           style: GoogleFonts.lato(
-                                            fontSize: 20,
+                                            fontSize: 14,
                                             color: Colors.black,
                                           ),
                                         ),
@@ -155,7 +155,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         Text(docs[index].get('especialidade'),
                                             style: GoogleFonts.lato(
-                                              fontSize: 20,
+                                              fontSize: 14,
                                               color: Colors.black,
                                             )),
                                       ],
@@ -169,12 +169,12 @@ class _HomePageState extends State<HomePage> {
                                     Row(children: [
                                       Icon(
                                         Icons.timer_outlined,
-                                        size: 20,
+                                        size: 14,
                                         color: Colors.black,
                                       ),
                                       Text(docs[index].get('tempo') + "min",
                                           style: GoogleFonts.lato(
-                                            fontSize: 20,
+                                            fontSize: 14,
                                             color: Colors.black,
                                           )),
                                     ]),
@@ -182,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         Icon(
                                           Icons.attach_money,
-                                          size: 20,
+                                          size: 14,
                                           color: Colors.black,
                                         ),
                                         Text(
@@ -190,7 +190,7 @@ class _HomePageState extends State<HomePage> {
                                                 docs[index].get('valor') +
                                                 ",00",
                                             style: GoogleFonts.lato(
-                                              fontSize: 20,
+                                              fontSize: 14,
                                               color: Colors.black,
                                             )),
                                       ],
@@ -200,14 +200,14 @@ class _HomePageState extends State<HomePage> {
                                         Text(
                                           docs[index].get('cidade') + ", ",
                                           style: GoogleFonts.lato(
-                                            fontSize: 20,
+                                            fontSize: 14,
                                             color: Colors.black,
                                           ),
                                         ),
                                         Text(
                                           docs[index].get('bairro'),
                                           style: GoogleFonts.lato(
-                                            fontSize: 20,
+                                            fontSize: 14,
                                             color: Colors.black,
                                           ),
                                         ),

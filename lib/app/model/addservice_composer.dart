@@ -92,43 +92,11 @@ class _AddServiceComposerState extends State<AddServiceComposer> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Divider(),
-          FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-            future: FirebaseFirestore.instance
-                .collection("categoria")
-                .doc("categorias")
-                .get(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData)
-                return const Center(
-                  child: const CupertinoActivityIndicator(),
-                );
-              return Container(
-                child: SizedBox(
-                  width: 240,
-                  // ignore: missing_required_param
-                  child: DropdownButton(
-                      value: null,
-                      icon: const Icon(Icons.arrow_drop_down),
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      underline: Container(
-                        height: 2,
-                        color: Colors.black,
-                      ),
-                      items: snapshot.data.docs.map((DocumentSnapshot doc) {
-                        return DropdownMenuItem<String>(
-                            value: doc[snapshot].data('categorias'),
-                            child: doc[snapshot].data('categorias'));
-                      })),
-                ),
-              );
-            },
-          ),
-          /*Container(
-            child: SizedBox(
-              width: 240,
+          SizedBox(
+            width: 240,
+            child: Container(
               child: DropdownButton<String>(
-                value: null,
+                value: categoria,
                 icon: const Icon(Icons.arrow_drop_down),
                 elevation: 16,
                 style: const TextStyle(color: Colors.black),
@@ -148,7 +116,7 @@ class _AddServiceComposerState extends State<AddServiceComposer> {
                 onChanged: (item) => setState(() => categoria = item),
               ),
             ),
-          ),*/
+          ),
           SizedBox(
             width: 240,
             child: Container(
