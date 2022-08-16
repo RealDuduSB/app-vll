@@ -67,7 +67,7 @@ class _LoginState extends State<Login> {
       key: _controller.formKey,
       child: Card(
         elevation: 5,
-        shadowColor: Colors.red,
+        shadowColor: Colors.blueGrey,
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -87,6 +87,9 @@ class _LoginState extends State<Login> {
                   }
                   return null;
                 },
+              ),
+              SizedBox(
+                height: 15,
               ),
               TextFormField(
                 obscureText: true,

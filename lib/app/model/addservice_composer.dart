@@ -1,8 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sbs_app/app/model/todo_add_model.dart';
 import '../controller/addservice_controller.dart';
 import '../pages/home_page.dart';
 import 'package:http/http.dart' as http;
@@ -31,6 +32,7 @@ class _AddServiceComposerState extends State<AddServiceComposer> {
   final _controller = AddServiceController();
   final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
       GlobalKey<ScaffoldMessengerState>();
+
   List<String> items = ['Categoria', 'Mãos e pés', 'Pele', 'Cabelo'];
   String categoria = 'Categoria';
 
@@ -90,11 +92,43 @@ class _AddServiceComposerState extends State<AddServiceComposer> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Divider(),
-          Container(
+          FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+            future: FirebaseFirestore.instance
+                .collection("categoria")
+                .doc("categorias")
+                .get(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData)
+                return const Center(
+                  child: const CupertinoActivityIndicator(),
+                );
+              return Container(
+                child: SizedBox(
+                  width: 240,
+                  // ignore: missing_required_param
+                  child: DropdownButton(
+                      value: null,
+                      icon: const Icon(Icons.arrow_drop_down),
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.black),
+                      underline: Container(
+                        height: 2,
+                        color: Colors.black,
+                      ),
+                      items: snapshot.data.docs.map((DocumentSnapshot doc) {
+                        return DropdownMenuItem<String>(
+                            value: doc[snapshot].data('categorias'),
+                            child: doc[snapshot].data('categorias'));
+                      })),
+                ),
+              );
+            },
+          ),
+          /*Container(
             child: SizedBox(
               width: 240,
               child: DropdownButton<String>(
-                value: categoria,
+                value: null,
                 icon: const Icon(Icons.arrow_drop_down),
                 elevation: 16,
                 style: const TextStyle(color: Colors.black),
@@ -114,7 +148,7 @@ class _AddServiceComposerState extends State<AddServiceComposer> {
                 onChanged: (item) => setState(() => categoria = item),
               ),
             ),
-          ),
+          ),*/
           SizedBox(
             width: 240,
             child: Container(
