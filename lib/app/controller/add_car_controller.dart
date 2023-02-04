@@ -12,7 +12,7 @@ class AddServiceController {
   final TextEditingController controllerTextUserId = TextEditingController();
   final TextEditingController controllerTextEstado = TextEditingController();
   final TextEditingController controllerTextCidade = TextEditingController();
-  final TextEditingController controllerTextBairro = TextEditingController();
+  final TextEditingController controllerTextIdCar = TextEditingController();
   final TextEditingController controllerTextRua = TextEditingController();
   final TextEditingController controllerTextNumeroCasa =
       TextEditingController();

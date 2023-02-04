@@ -41,7 +41,7 @@ class _MeusServicosState extends State<MeusServicos> {
         centerTitle: true,
         elevation: 0.0,
         title: Text(
-          "Meus serviços",
+          "Meus anúncios",
           style: GoogleFonts.lato(fontSize: 30, color: Colors.white),
         ),
       ),
@@ -80,7 +80,7 @@ class _MeusServicosState extends State<MeusServicos> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        docs[index].get('categoria'),
+                                        docs[index].get('marca'),
                                         style: GoogleFonts.lato(
                                           fontSize: 20,
                                           color: Colors.black,
@@ -90,7 +90,7 @@ class _MeusServicosState extends State<MeusServicos> {
                                   ),
                                   Row(
                                     children: [
-                                      Text(docs[index].get('especialidade'),
+                                      Text(docs[index].get('modelo'),
                                           style: GoogleFonts.lato(
                                             fontSize: 20,
                                             color: Colors.black,
@@ -109,7 +109,7 @@ class _MeusServicosState extends State<MeusServicos> {
                                       size: 20,
                                       color: Colors.black,
                                     ),
-                                    Text(docs[index].get('tempo') + "min",
+                                    Text("Ano " + docs[index].get('ano'),
                                         style: GoogleFonts.lato(
                                           fontSize: 20,
                                           color: Colors.black,
@@ -132,24 +132,6 @@ class _MeusServicosState extends State<MeusServicos> {
                                           )),
                                     ],
                                   ),
-                                  Row(
-                                    children: [
-                                      Text(
-                                        docs[index].get('cidade') + ", ",
-                                        style: GoogleFonts.lato(
-                                          fontSize: 20,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                      Text(
-                                        docs[index].get('bairro'),
-                                        style: GoogleFonts.lato(
-                                          fontSize: 20,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ],
-                                  )
                                 ],
                               ),
                             ],
