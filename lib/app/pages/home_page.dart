@@ -36,14 +36,18 @@ class _HomePageState extends State<HomePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Color(0xFF001B43),
       drawer: Drawer(
         backgroundColor: Colors.lightGreenAccent,
         child: ListView(
           children: <Widget>[
             ListTile(
               tileColor: Colors.green,
-              leading: Icon(Icons.settings, color: Colors.black, size: 15,),
+              leading: Icon(
+                Icons.settings,
+                color: Colors.black,
+                size: 15,
+              ),
               title: Column(
                 children: [
                   Text(
@@ -97,7 +101,8 @@ class _HomePageState extends State<HomePage> {
               onTap: () {},
             ),
             ListTile(
-              leading: Icon(Icons.notifications_active_rounded, color: Colors.black),
+              leading:
+                  Icon(Icons.notifications_active_rounded, color: Colors.black),
               title: Text("Notificações",
                   style: GoogleFonts.lato(fontSize: 27, color: Colors.black)),
               onTap: () {},
@@ -148,26 +153,25 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-
-          ],
+          children: [],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-
-      ),
+      bottomNavigationBar: BottomAppBar(),
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.black,
-
           child: Container(
             width: 100,
             height: 100,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Icon(Icons.checklist_rounded),
-              Text("Vistoriar", style: TextStyle(fontSize: 10),),
-            ],),
+                Icon(Icons.checklist_rounded),
+                Text(
+                  "Vistoriar",
+                  style: TextStyle(fontSize: 10),
+                ),
+              ],
+            ),
           ),
           onPressed: () {
             Navigator.push(

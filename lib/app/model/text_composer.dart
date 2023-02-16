@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 // ignore: must_be_immutable
 class TextComposer extends StatefulWidget {
@@ -33,13 +32,7 @@ class _TextComposerState extends State<TextComposer> {
         child: Row(
           children: <Widget>[
             IconButton(
-                onPressed: () async {
-                  // ignore: deprecated_member_use
-                  XFile img =
-                      await ImagePicker().pickImage(source: ImageSource.camera);
-                  if (img == null) return;
-                  widget.sendMessage(img: File(img.path));
-                },
+                onPressed: () async {},
                 icon: Icon(Icons.photo_camera)),
             Expanded(
               child: TextField(

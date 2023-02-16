@@ -15,21 +15,27 @@ class _RegistrarState extends State<Registrar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(25, 32, 47, 66),
+      backgroundColor: Color(0xFF001B43),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 30.0),
-                child: Image.asset("images/valluulogobranco.png", height: 100,fit: BoxFit.cover,),
+                child: Image.asset(
+                  "images/valluulogobranco.png",
+                  height: 100,
+                  fit: BoxFit.cover,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 15, right: 15, left: 15),
                 child: Form(
                   key: _controller.formKey,
                   child: Card(
-                    color: Colors.white,
+                    color: Colors.green,
+                    elevation: 5,
+                    shadowColor: Colors.lightGreenAccent,
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
@@ -40,8 +46,11 @@ class _RegistrarState extends State<Registrar> {
                             controller: _controller.displayName,
                             decoration: InputDecoration(
                               labelText: "Nome *",
+                              labelStyle: TextStyle(color: Colors.black),
                               border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red, width: 5.0),
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide:
+                                    BorderSide(color: Colors.red, width: 5.0),
                               ),
                             ),
                             validator: (String val) {
@@ -51,13 +60,18 @@ class _RegistrarState extends State<Registrar> {
                               return null;
                             },
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           TextFormField(
                             controller: _controller.emailController,
                             decoration: InputDecoration(
                               labelText: "email *",
+                              labelStyle: TextStyle(color: Colors.black),
                               border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red, width: 5.0),
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide:
+                                    BorderSide(color: Colors.red, width: 5.0),
                               ),
                             ),
                             validator: (String val) {
@@ -67,14 +81,19 @@ class _RegistrarState extends State<Registrar> {
                               return null;
                             },
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           TextFormField(
                             controller: _controller.senhaController,
                             obscureText: true,
                             decoration: InputDecoration(
                               labelText: "Senha *",
+                              labelStyle: TextStyle(color: Colors.black),
                               border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red, width: 5.0),
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide:
+                                    BorderSide(color: Colors.red, width: 5.0),
                               ),
                             ),
                             validator: (String val) {
@@ -84,13 +103,18 @@ class _RegistrarState extends State<Registrar> {
                               return null;
                             },
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           TextFormField(
                             obscureText: true,
                             decoration: InputDecoration(
-                              labelText: "Senha *",
+                              labelText: "Repetir senha *",
+                              labelStyle: TextStyle(color: Colors.black),
                               border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.red, width: 5.0),
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide:
+                                    BorderSide(color: Colors.red, width: 5.0),
                               ),
                             ),
                             validator: (String val) {
@@ -103,15 +127,26 @@ class _RegistrarState extends State<Registrar> {
                           Container(
                             padding: const EdgeInsets.symmetric(vertical: 16.0),
                             child: OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                backgroundColor: Color(0xFF001B43),
+                                shadowColor: Colors.blue,
+                                elevation: 5,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                              ),
                               onPressed: () {
-                                if (_controller.formKey.currentState.validate()) {
+                                if (_controller.formKey.currentState
+                                    .validate()) {
                                   _registerAcount();
                                 }
                               },
                               child: Text(
                                 "REGISTRAR",
-                                style:
-                                    GoogleFonts.lato(fontSize: 25, color: Colors.black),
+                                style: GoogleFonts.lato(
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),

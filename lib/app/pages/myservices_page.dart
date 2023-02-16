@@ -49,99 +49,94 @@ class _MeusServicosState extends State<MeusServicos> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-              child: StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection('services')
-                .where('userId', isEqualTo: _getCurrentUser())
-                .snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.data == null) return CircularProgressIndicator();
-              return ListView.builder(
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (context, index) {
-                  List<DocumentSnapshot> docs = snapshot.data.docs.toList();
-
-                  return OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                          backgroundColor: Colors.white),
-                      onPressed: () {},
-                      child: Padding(
-                          padding: EdgeInsets.fromLTRB(30, 40, 30, 40),
-                          child: Column(
-                            children: <Widget>[
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        docs[index].get('marca'),
-                                        style: GoogleFonts.lato(
-                                          fontSize: 20,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text(docs[index].get('modelo'),
-                                          style: GoogleFonts.lato(
-                                            fontSize: 20,
-                                            color: Colors.black,
-                                          )),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Row(children: [
-                                    Icon(
-                                      Icons.timer_outlined,
-                                      size: 20,
-                                      color: Colors.black,
-                                    ),
-                                    Text("Ano " + docs[index].get('ano'),
-                                        style: GoogleFonts.lato(
-                                          fontSize: 20,
-                                          color: Colors.black,
-                                        )),
-                                  ]),
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.attach_money,
-                                        size: 20,
-                                        color: Colors.black,
-                                      ),
-                                      Text(
-                                          "R\$" +
-                                              docs[index].get('valor') +
-                                              ",00",
-                                          style: GoogleFonts.lato(
-                                            fontSize: 20,
-                                            color: Colors.black,
-                                          )),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          )));
-                },
-              );
-            },
-          )),
-        ],
+        children: [],
       ),
     );
+  }
+
+  Widget _widgetListVeiculosProprios() {
+    Expanded(
+        child: StreamBuilder(
+      stream: FirebaseFirestore.instance
+          .collection('services')
+          .where('userId', isEqualTo: _getCurrentUser())
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.data == null) return CircularProgressIndicator();
+        return ListView.builder(
+          itemCount: snapshot.data.docs.length,
+          itemBuilder: (context, index) {
+            List<DocumentSnapshot> docs = snapshot.data.docs.toList();
+
+            return OutlinedButton(
+                style: OutlinedButton.styleFrom(backgroundColor: Colors.white),
+                onPressed: () {},
+                child: Padding(
+                    padding: EdgeInsets.fromLTRB(30, 40, 30, 40),
+                    child: Column(
+                      children: <Widget>[
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  docs[index].get('marca'),
+                                  style: GoogleFonts.lato(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text(docs[index].get('modelo'),
+                                    style: GoogleFonts.lato(
+                                      fontSize: 20,
+                                      color: Colors.black,
+                                    )),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Row(children: [
+                              Icon(
+                                Icons.timer_outlined,
+                                size: 20,
+                                color: Colors.black,
+                              ),
+                              Text("Ano " + docs[index].get('ano'),
+                                  style: GoogleFonts.lato(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                  )),
+                            ]),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.attach_money,
+                                  size: 20,
+                                  color: Colors.black,
+                                ),
+                                Text("R\$" + docs[index].get('valor') + ",00",
+                                    style: GoogleFonts.lato(
+                                      fontSize: 20,
+                                      color: Colors.black,
+                                    )),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    )));
+          },
+        );
+      },
+    ));
   }
 }

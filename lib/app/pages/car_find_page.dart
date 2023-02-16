@@ -4,10 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sbs_app/app/pages/choice_page.dart';
 import 'package:flutter/services.dart';
 
-class CarDetailsPage extends StatelessWidget {
+class CarFindPage extends StatelessWidget {
   final String docSnapshot;
 
-  const CarDetailsPage({this.docSnapshot});
+  const CarFindPage({this.docSnapshot});
 
   @override
   Widget build(BuildContext context) {

@@ -32,8 +32,6 @@ class _AddCarComposerState extends State<AddCarComposer> {
   final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
       GlobalKey<ScaffoldMessengerState>();
 
-
-
   List<String> items = [
     'Marca',
     'Adamo',
@@ -195,6 +193,7 @@ class _AddCarComposerState extends State<AddCarComposer> {
 
     return uid;
   }
+
   idGenerator() async {
     final idCarTime = DateTime.now();
     return idCarTime.microsecondsSinceEpoch.toString();
@@ -203,7 +202,7 @@ class _AddCarComposerState extends State<AddCarComposer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.green,
         centerTitle: true,
         elevation: 0.0,
         title: Text(
@@ -266,42 +265,56 @@ class _AddCarComposerState extends State<AddCarComposer> {
                 print(path);
               },
               child: Container(
-                padding: const EdgeInsets.only(right: 20, left: 20, top: 20, bottom: 20),
+                padding: const EdgeInsets.only(
+                    right: 20, left: 20, top: 20, bottom: 20),
                 child: DottedBorder(
-                    borderType: BorderType.RRect,
-                    radius: Radius.circular(15),
-                    dashPattern: [1, 5],
-                    color: Colors.white,
-                    strokeWidth: 2,
-                    child: Card(
-                      color: Colors.indigo[900],
-
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.camera_enhance_rounded, size: 70, color: Colors.green),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.add_circle_rounded, color: Colors.green, size: 20,),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 6),
-                                  child: Text("Incluir Fotos", style: TextStyle(fontSize: 20, color: Colors.green),),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 10),
-                            child: Text("0 de 8 fotos", style: TextStyle(fontSize: 15, color: Colors.white),)),
-                        ],
-                      )),
+                  borderType: BorderType.RRect,
+                  radius: Radius.circular(15),
+                  dashPattern: [1, 5],
+                  color: Colors.white,
+                  strokeWidth: 2,
+                  child: Card(
+                    color: Colors.indigo[900],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
+                    child: Center(
+                        child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.camera_enhance_rounded,
+                            size: 70, color: Colors.green),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.add_circle_rounded,
+                                color: Colors.green,
+                                size: 20,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 6),
+                                child: Text(
+                                  "Incluir Fotos",
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.green),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(top: 10),
+                            child: Text(
+                              "0 de 8 fotos",
+                              style:
+                                  TextStyle(fontSize: 15, color: Colors.white),
+                            )),
+                      ],
+                    )),
+                  ),
                 ),
               ),
             ),
@@ -526,13 +539,13 @@ class _AddCarComposerState extends State<AddCarComposer> {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text("Anúncio publicado com sucesso")));
                       widget.sendService(
-                        marca: _controller.controllerTextcategoria.text =
-                            marca,
-                        modelo: _controller
-                            .controllerTextespecialidade.text = modelo,
+                        marca: _controller.controllerTextcategoria.text = marca,
+                        modelo: _controller.controllerTextespecialidade.text =
+                            modelo,
                         ano: _controller.controllerTexttempo.text = ano,
                         valor: _controller.controllerTextvalor.text,
-                        idCar: _controller.controllerTextIdCar.text =  await idGenerator(),
+                        idCar: _controller.controllerTextIdCar.text =
+                            await idGenerator(),
                         // rua: _controller.controllerTextRua.text,
                         // numeroCasa: _controller.controllerTextNumeroCasa.text,
                         // estado: _controller.controllerTextEstado.text =

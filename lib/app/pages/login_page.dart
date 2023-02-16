@@ -18,7 +18,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(25, 32, 47, 66),
+        backgroundColor: Color(0xFF001B43),
         key: _scaffoldKey,
         body: SingleChildScrollView(
           child: Column(
@@ -27,35 +27,69 @@ class _LoginState extends State<Login> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 30.0),
-                child: Image.asset("images/valluulogobranco.png", height: 100,fit: BoxFit.cover,),
+                child: Image.asset(
+                  "images/valluulogobranco.png",
+                  height: 100,
+                  fit: BoxFit.cover,
+                ),
               ),
-              SizedBox(height: 25,),
-              Padding(
-                padding: const EdgeInsets.only(left: 15.0),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                    child: Text("Vamos começar!", style: TextStyle(fontFamily: "Franklin Gothic Book", color: Colors.white, fontSize: 35),)),
+              SizedBox(
+                height: 25,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 15.0),
                 child: Align(
                     alignment: Alignment.topLeft,
-                    child: Text("Mais segurança e transparência em sua compra e venda.", style: TextStyle(fontFamily: "Franklin Gothic Book", color: Colors.white, fontSize: 15),)),
+                    child: Text(
+                      "Vamos começar!",
+                      style: TextStyle(
+                          fontFamily: "Franklin Gothic Book",
+                          color: Colors.white,
+                          fontSize: 35),
+                    )),
               ),
-
-              SizedBox(height: 25,),
-              Padding(padding: const EdgeInsets.only(left: 15.0, right: 15), child: withEmailPassword(),),
-              SizedBox(width: 15, height: 15,),
+              Padding(
+                padding: const EdgeInsets.only(left: 15.0),
+                child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Mais segurança e transparência em sua compra e venda.",
+                      style: TextStyle(
+                          fontFamily: "Franklin Gothic Book",
+                          color: Colors.white,
+                          fontSize: 15),
+                    )),
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15.0, right: 15),
+                child: withEmailPassword(),
+              ),
+              SizedBox(
+                width: 15,
+                height: 15,
+              ),
               Container(
                   alignment: Alignment.center,
-                  child: TextButton(
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      shadowColor: Colors.lightGreenAccent,
+                      elevation: 5,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                    ),
                     onPressed: () {
                       _push(context, Registrar());
                     },
                     child: Text(
                       "Nao tem registro? Clique aqui",
-                      style:
-                          TextStyle(fontSize: 25, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Color(0xFF001B43),
+                      ),
                     ),
                   )),
               Divider(),
@@ -68,72 +102,94 @@ class _LoginState extends State<Login> {
     return Form(
       key: _controller.formKey,
       child: Card(
-        color: Colors.orangeAccent[100],
+        color: Colors.green,
         elevation: 5,
-        shadowColor: Colors.blueGrey,
+        shadowColor: Colors.lightGreenAccent,
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Login", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: 25),),
+              Text(
+                "Login",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 25),
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 10),
-                child: Container(
-                  color: Colors.white,
-                  child: TextFormField(
-                    controller: _controller.emailController,
-                    decoration: InputDecoration(
-
-                      labelText: "e-mail",
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 5.0),
-                      ),
-                    ),
-                    validator: (String val) {
-                      if (val.isEmpty) {
-                        return "Por favor informe o e-mail!";
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                color: Colors.white,
                 child: TextFormField(
-                  obscureText: true,
-                  controller: _controller.senhaController,
+                  controller: _controller.emailController,
                   decoration: InputDecoration(
-                    labelText: "Senha",
+                    labelText: "e-mail",
+                    labelStyle: TextStyle(color: Colors.black),
                     border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(color: Colors.red, width: 5.0),
                     ),
                   ),
                   validator: (String val) {
                     if (val.isEmpty) {
-                      return "Por favor informe a senha!";
+                      return "Por favor informe o e-mail!";
                     }
                     return null;
                   },
                 ),
               ),
+              SizedBox(
+                height: 15,
+              ),
+              TextFormField(
+                obscureText: true,
+                controller: _controller.senhaController,
+                decoration: InputDecoration(
+                  labelStyle: TextStyle(color: Colors.black),
+                  labelText: "Senha",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: Colors.red, width: 5.0),
+                  ),
+                ),
+                //                 decoration: InputDecoration(
+                //   enabledBorder: OutlineInputBorder(
+                //     borderSide: BorderSide(
+                //         width: 3, color: Colors.greenAccent), //<-- SEE HERE
+                //   ),
+                // ),
+                validator: (String val) {
+                  if (val.isEmpty) {
+                    return "Por favor informe a senha!";
+                  }
+                  return null;
+                },
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextButton(onPressed: (){}, child: Text("Esqueceu sua senha?", style: TextStyle(color: Colors.black),)),
+                  TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Esqueceu sua senha?",
+                        style: TextStyle(color: Colors.black),
+                      )),
                   Container(
                     padding: const EdgeInsets.only(top: 16),
                     alignment: Alignment.center,
                     child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor: Color(0xFF001B43),
+                        shadowColor: Colors.blue,
+                        elevation: 5,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                      ),
                       child: Text(
                         "ENTRAR",
                         style: GoogleFonts.lato(
                           fontSize: 25,
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
                       ),
                       onPressed: () async {

@@ -5,15 +5,14 @@ import 'package:sbs_app/app/pages/car_details_page.dart';
 import 'package:sbs_app/app/pages/car_find_page.dart';
 import 'package:sbs_app/app/pages/choice_page.dart';
 import 'package:flutter/services.dart';
-import 'package:sbs_app/app/pages/home_buy_page_2.dart';
+import 'home_buy_page.dart';
 
-class HomeBuyPage extends StatefulWidget {
+class HomeBuyPage2 extends StatefulWidget {
   final bool isActive;
   final Icon activeIcon;
   final Icon inactiveIicon;
-
   final void Function() onTap;
-  const HomeBuyPage({
+  const HomeBuyPage2({
     Key key,
     this.isActive,
     this.activeIcon,
@@ -22,13 +21,13 @@ class HomeBuyPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _HomeBuyPageState createState() => _HomeBuyPageState();
+  _HomeBuyPage2State createState() => _HomeBuyPage2State();
 }
 
 CollectionReference services =
     FirebaseFirestore.instance.collection('services');
 
-class _HomeBuyPageState extends State<HomeBuyPage> {
+class _HomeBuyPage2State extends State<HomeBuyPage2> {
   FocusNode myFocusNode;
   FocusNode myFocusNode1;
   FocusNode myFocusNode2;
@@ -147,11 +146,11 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HomeBuyPage2()),
+                              builder: (context) => HomeBuyPage()),
                         );
                       },
                       child: Text(
-                        'Mudar para mercosul',
+                        'Mudar para convencional',
                         style:
                             GoogleFonts.lato(fontSize: 18, color: Colors.white),
                       )),
@@ -165,7 +164,7 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                 image: DecorationImage(
                   fit: BoxFit.contain,
                   image: Image.asset(
-                    'images/placaantiga.png',
+                    'images/mercosul.jpeg',
                   ).image,
                 ),
               ),
@@ -178,7 +177,7 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                   children: [
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(3, 37, 3, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
                         child: TextFormField(
                           autofocus: true,
                           onChanged: (text) {
@@ -197,14 +196,14 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black,
-                                width: 1,
+                                width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black,
-                                width: 1,
+                                width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -229,7 +228,7 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                     ),
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(3, 37, 3, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
                         child: TextFormField(
                           focusNode: myFocusNode,
                           autofocus: true,
@@ -249,14 +248,14 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black,
-                                width: 1,
+                                width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black,
-                                width: 1,
+                                width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -283,7 +282,7 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                     ),
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(3, 37, 3, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
                         child: TextFormField(
                           focusNode: myFocusNode1,
                           autofocus: true,
@@ -303,14 +302,14 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black,
-                                width: 1,
+                                width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black,
-                                width: 1,
+                                width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -337,7 +336,7 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                     ),
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(3, 37, 3, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
                         child: TextFormField(
                           focusNode: myFocusNode2,
                           autofocus: true,
@@ -357,14 +356,14 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black,
-                                width: 1,
+                                width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black,
-                                width: 1,
+                                width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -390,9 +389,8 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                       ),
                     ),
                     Expanded(
-                      //mudança mercosul para antiga
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(3, 37, 3, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
                         child: TextFormField(
                           focusNode: myFocusNode3,
                           autofocus: true,
@@ -401,7 +399,7 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                               myFocusNode4.requestFocus();
                             }
                           },
-                          keyboardType: TextInputType.number,
+                          textCapitalization: TextCapitalization.characters,
                           textAlign: TextAlign.center,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(1),
@@ -412,14 +410,14 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black,
-                                width: 1,
+                                width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black,
-                                width: 1,
+                                width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -446,7 +444,7 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                     ),
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(3, 37, 3, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
                         child: TextFormField(
                           focusNode: myFocusNode4,
                           autofocus: true,
@@ -466,14 +464,14 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black,
-                                width: 1,
+                                width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black,
-                                width: 1,
+                                width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -500,7 +498,7 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                     ),
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(3, 37, 3, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
                         child: TextFormField(
                           focusNode: myFocusNode5,
                           autofocus: true,
@@ -515,14 +513,14 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black,
-                                width: 1,
+                                width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.black,
-                                width: 1,
+                                width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -749,3 +747,8 @@ class RowFormatters extends StatelessWidget {
     );
   }
 }
+
+// Widget _placaMercosul() {
+  
+//   return ;
+// }
