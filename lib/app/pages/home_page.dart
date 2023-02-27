@@ -125,7 +125,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       appBar: AppBar(
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.green,
         actions: [
           Row(
             children: [
@@ -149,134 +149,94 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: Container(
-        color: Colors.indigo,
+        color: Color(0xFF001B43),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [],
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    color: Colors.green,
+                    width: 150,
+                    height: 150,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AddServicePage()),
+                        );
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add,
+                            color: Color(0xFF001B43),
+                            size: 30,
+                          ),
+                          Text(
+                            "Publicar",
+                            style: GoogleFonts.lato(
+                                color: Color(0xFF001B43), fontSize: 20),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    color: Colors.green,
+                    width: 150,
+                    height: 150,
+                    child: OutlinedButton(
+                      onPressed: () {},
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.add,
+                                color: Color(0xFF001B43),
+                                size: 30,
+                              ),
+                              Icon(
+                                Icons.checklist,
+                                color: Color(0xFF001B43),
+                                size: 30,
+                              ),
+                            ],
+                          ),
+                          Center(
+                            child: Text(
+                              "SOLICITAR",
+                              style: GoogleFonts.lato(
+                                  color: Color(0xFF001B43), fontSize: 20),
+                            ),
+                          ),
+                          Center(
+                            child: Text(
+                              "VISTORIA",
+                              style: GoogleFonts.lato(
+                                  color: Color(0xFF001B43), fontSize: 20),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.black,
-          child: Container(
-            width: 100,
-            height: 100,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.checklist_rounded),
-                Text(
-                  "Vistoriar",
-                  style: TextStyle(fontSize: 10),
-                ),
-              ],
-            ),
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => AddServicePage()),
-            );
-          }),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
-
-/*Expanded(
-                child: StreamBuilder(
-              stream:
-                  FirebaseFirestore.instance.collection('services').snapshots(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.data == null) return CircularProgressIndicator();
-
-                List<DocumentSnapshot> docs = snapshot.data.docs.toList();
-
-                return ListView.builder(
-                  itemCount: docs.length,
-                  itemBuilder: (context, index) {
-                    return OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                            backgroundColor: Colors.white),
-                        onPressed: () {},
-                        child: Column(
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      docs[index].get('categoria'),
-                                      style: GoogleFonts.lato(
-                                        fontSize: 14,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text(docs[index].get('especialidade'),
-                                        style: GoogleFonts.lato(
-                                          fontSize: 14,
-                                          color: Colors.black,
-                                        )),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Row(children: [
-                                  Icon(
-                                    Icons.timer_outlined,
-                                    size: 14,
-                                    color: Colors.black,
-                                  ),
-                                  Text(docs[index].get('tempo') + "min",
-                                      style: GoogleFonts.lato(
-                                        fontSize: 14,
-                                        color: Colors.black,
-                                      )),
-                                ]),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.attach_money,
-                                      size: 14,
-                                      color: Colors.black,
-                                    ),
-                                    Text(
-                                        "R\$" +
-                                            docs[index].get('valor') +
-                                            ",00",
-                                        style: GoogleFonts.lato(
-                                          fontSize: 14,
-                                          color: Colors.black,
-                                        )),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      docs[index].get('bairro'),
-                                      style: GoogleFonts.lato(
-                                        fontSize: 14,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ],
-                        ));
-                  },
-                );
-              },
-            )),*/

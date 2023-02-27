@@ -660,7 +660,7 @@ class _HomeBuyPage2State extends State<HomeBuyPage2> {
                                             children: [
                                               Text(
                                                   "Modelo: " +
-                                                      docs[index].get('marca'),
+                                                      docs[index].get('modelo'),
                                                   style: GoogleFonts.lato(
                                                     fontSize: 14,
                                                     color: Colors.black,
@@ -747,8 +747,3 @@ class RowFormatters extends StatelessWidget {
     );
   }
 }
-
-// Widget _placaMercosul() {
-  
-//   return ;
-// }

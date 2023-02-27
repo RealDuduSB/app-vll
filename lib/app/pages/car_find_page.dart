@@ -70,124 +70,17 @@ class CarFindPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 30.0),
-            child: Image.asset(
-              "images/valluulogobranco.png",
-              height: 100,
-              fit: BoxFit.cover,
+          Container(
+            width: double.maxFinite,
+            height: 150,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Icon(
+                Icons.image_not_supported_sharp,
+                size: 45,
+              ),
             ),
           ),
-          Expanded(
-              child: StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection('services')
-                .where(FieldPath.documentId, isEqualTo: docSnapshot)
-                .snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.data == null) return CircularProgressIndicator();
-              return ListView.builder(
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (context, index) {
-                  List<DocumentSnapshot> docs = snapshot.data.docs.toList();
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                      width: 180,
-                      decoration: BoxDecoration(
-                        color: Color(0xFF008500),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // Container(
-                            //   decoration: BoxDecoration(
-                            //     color: Color(0xFF008500),
-                            //     borderRadius: BorderRadius.circular(10),
-                            //   ),
-                            //   child: Image.asset("images/car_null.png",
-                            //       height: double.maxFinite),
-                            // ),
-                            Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Detalhes",
-                                  style: GoogleFonts.lato(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Marca: " + docs[index].get('marca'),
-                                          style: GoogleFonts.lato(
-                                            fontSize: 14,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                            "Modelo: " +
-                                                docs[index].get('marca'),
-                                            style: GoogleFonts.lato(
-                                              fontSize: 14,
-                                              color: Colors.black,
-                                            )),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Row(children: [
-                                      Text("Ano: " + docs[index].get('ano'),
-                                          style: GoogleFonts.lato(
-                                            fontSize: 14,
-                                            color: Colors.black,
-                                          )),
-                                    ]),
-                                    Row(
-                                      children: [
-                                        Text(
-                                            "R\$ " +
-                                                docs[index].get('valor') +
-                                                ",00",
-                                            style: GoogleFonts.lato(
-                                              fontSize: 14,
-                                              color: Colors.black,
-                                            )),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              );
-            },
-          )),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(

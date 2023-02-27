@@ -6,6 +6,7 @@ import '../controller/add_car_controller.dart';
 import '../pages/home_page.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class AddCarComposer extends StatefulWidget {
@@ -31,6 +32,37 @@ class _AddCarComposerState extends State<AddCarComposer> {
   final _controller = AddServiceController();
   final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
       GlobalKey<ScaffoldMessengerState>();
+  FocusNode myFocusNode;
+  FocusNode myFocusNode1;
+  FocusNode myFocusNode2;
+  FocusNode myFocusNode3;
+  FocusNode myFocusNode4;
+  FocusNode myFocusNode5;
+
+  @override
+  void initState() {
+    super.initState();
+
+    myFocusNode = FocusNode();
+    myFocusNode1 = FocusNode();
+    myFocusNode2 = FocusNode();
+    myFocusNode3 = FocusNode();
+    myFocusNode4 = FocusNode();
+    myFocusNode5 = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    // Clean up the focus node when the Form is disposed.
+    myFocusNode.dispose();
+    myFocusNode1.dispose();
+    myFocusNode2.dispose();
+    myFocusNode3.dispose();
+    myFocusNode4.dispose();
+    myFocusNode5.dispose();
+
+    super.dispose();
+  }
 
   List<String> items = [
     'Marca',
@@ -199,8 +231,11 @@ class _AddCarComposerState extends State<AddCarComposer> {
     return idCarTime.microsecondsSinceEpoch.toString();
   }
 
+  final NumberFormat numFormat = NumberFormat("#,##0.00", "pt_BR");
+  final NumberFormat numSanitizedFormat = NumberFormat("pt_BR");
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF001B43),
       appBar: AppBar(
         backgroundColor: Colors.green,
         centerTitle: true,
@@ -219,7 +254,7 @@ class _AddCarComposerState extends State<AddCarComposer> {
               child: Padding(
                 padding: const EdgeInsets.only(right: 10),
                 child: Text(
-                  "Limpar",
+                  "Voltar",
                   style: TextStyle(
                       fontFamily: "Franklin Gothic Book",
                       color: Colors.white,
@@ -320,245 +355,676 @@ class _AddCarComposerState extends State<AddCarComposer> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
-            child: Container(
-              child: DropdownButton<String>(
-                value: marca,
-                icon: const Icon(Icons.arrow_drop_down),
-                elevation: 16,
-                style: const TextStyle(color: Colors.black),
-                underline: Container(
-                  height: 2,
-                  color: Colors.black,
-                ),
-                items: items
-                    .map((item) => DropdownMenuItem(
-                        value: item,
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            child: Card(
+              color: Colors.green,
+              elevation: 5,
+              shadowColor: Colors.lightGreenAccent,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 20, top: 10),
+                child: Column(
+                  children: [
+                    Center(
                         child: Text(
-                          item,
-                          style: GoogleFonts.lato(
-                              fontSize: 24.0, color: Colors.black),
-                        )))
-                    .toList(),
-                onChanged: (item) => setState(() => marca = item),
-              ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
-            child: DropdownButton<String>(
-              value: modelo,
-              icon: const Icon(Icons.arrow_drop_down),
-              elevation: 16,
-              style: const TextStyle(color: Colors.black),
-              underline: Container(
-                height: 2,
-                color: Colors.black,
-              ),
-              items: items2
-                  .map((item2) => DropdownMenuItem(
-                      value: item2,
-                      child: Text(
-                        item2,
-                        style: GoogleFonts.lato(
-                            fontSize: 24.0, color: Colors.black),
-                      )))
-                  .toList(),
-              onChanged: (item2) => setState(() => modelo = item2),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
-            child: DropdownButton<String>(
-              value: ano,
-              icon: const Icon(Icons.arrow_drop_down),
-              elevation: 16,
-              style: const TextStyle(color: Colors.black),
-              underline: Container(
-                height: 2,
-                color: Colors.black,
-              ),
-              items: items3
-                  .map((item3) => DropdownMenuItem(
-                      value: item3,
-                      child: Text(
-                        item3,
-                        style: GoogleFonts.lato(
-                            fontSize: 24.0, color: Colors.black),
-                      )))
-                  .toList(),
-              onChanged: (item3) => setState(() => ano = item3),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
-            child: DropdownButton<String>(
-              value: estado,
-              icon: const Icon(Icons.arrow_drop_down),
-              elevation: 16,
-              style: const TextStyle(color: Colors.black),
-              underline: Container(
-                height: 2,
-                color: Colors.black,
-              ),
-              items: items4
-                  .map((item4) => DropdownMenuItem(
-                      value: item4,
-                      child: Text(
-                        item4,
-                        style: GoogleFonts.lato(
-                            fontSize: 24.0, color: Colors.black),
-                      )))
-                  .toList(),
-              onChanged: (item4) => setState(() => estado = item4),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
-            child: TextFormField(
-              controller: _controller.controllerTextvalor,
-              decoration: InputDecoration(
-                prefixText: 'R\$',
-                labelText: "Preço \$",
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red, width: 5.0),
+                      "Placa",
+                      style: GoogleFonts.lato(fontSize: 26),
+                    )),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          top: 0, bottom: 0, left: 10, right: 10),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(3, 37, 3, 0),
+                              child: TextFormField(
+                                autofocus: true,
+                                onChanged: (text) {
+                                  if (text.length == 1) {
+                                    myFocusNode.requestFocus();
+                                  }
+                                },
+                                // controller:  textEditingController.toString().toUpperCase(),
+                                textAlign: TextAlign.center,
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                ],
+                                textCapitalization:
+                                    TextCapitalization.characters,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                                minLines: 1,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(3, 37, 3, 0),
+                              child: TextFormField(
+                                focusNode: myFocusNode,
+                                autofocus: true,
+                                onChanged: (text) {
+                                  if (text.length == 1) {
+                                    myFocusNode1.requestFocus();
+                                  }
+                                },
+                                textCapitalization:
+                                    TextCapitalization.characters,
+                                textAlign: TextAlign.center,
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                ],
+                                // controller: emailAddressController1,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                                style: GoogleFonts.lato(
+                                  color: Color(0xFF2B343A),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(3, 37, 3, 0),
+                              child: TextFormField(
+                                focusNode: myFocusNode1,
+                                autofocus: true,
+                                onChanged: (text) {
+                                  if (text.length == 1) {
+                                    myFocusNode2.requestFocus();
+                                  }
+                                },
+                                textCapitalization:
+                                    TextCapitalization.characters,
+                                textAlign: TextAlign.center,
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                ],
+                                // controller: emailAddressController1,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                                style: GoogleFonts.lato(
+                                  color: Color(0xFF2B343A),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(3, 37, 3, 0),
+                              child: TextFormField(
+                                focusNode: myFocusNode2,
+                                autofocus: true,
+                                onChanged: (text) {
+                                  if (text.length == 1) {
+                                    myFocusNode3.requestFocus();
+                                  }
+                                },
+                                keyboardType: TextInputType.number,
+                                textAlign: TextAlign.center,
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                ],
+                                // controller: emailAddressController1,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                                style: GoogleFonts.lato(
+                                  color: Color(0xFF2B343A),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            //mudança mercosul para antiga
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(3, 37, 3, 0),
+                              child: TextFormField(
+                                focusNode: myFocusNode3,
+                                autofocus: true,
+                                onChanged: (text) {
+                                  if (text.length == 1) {
+                                    myFocusNode4.requestFocus();
+                                  }
+                                },
+                                keyboardType: TextInputType.number,
+                                textAlign: TextAlign.center,
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                ],
+                                // controller: emailAddressController1,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                                style: GoogleFonts.lato(
+                                  color: Color(0xFF2B343A),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(3, 37, 3, 0),
+                              child: TextFormField(
+                                focusNode: myFocusNode4,
+                                autofocus: true,
+                                onChanged: (text) {
+                                  if (text.length == 1) {
+                                    myFocusNode5.requestFocus();
+                                  }
+                                },
+                                keyboardType: TextInputType.number,
+                                textAlign: TextAlign.center,
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                ],
+                                // controller: emailAddressController1,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                                style: GoogleFonts.lato(
+                                  color: Color(0xFF2B343A),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(3, 37, 3, 0),
+                              child: TextFormField(
+                                focusNode: myFocusNode5,
+                                autofocus: true,
+                                keyboardType: TextInputType.number,
+                                textAlign: TextAlign.center,
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                ],
+                                // controller: emailAddressController1,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 1,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                                style: GoogleFonts.lato(
+                                  color: Color(0xFF2B343A),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              keyboardType: TextInputType.number,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(6),
-              ],
-              validator: (String val) {
-                if (val == null || val.isEmpty) {
-                  return "Por favor informe o preço";
-                }
-                return null;
-              },
             ),
           ),
-          // Container(
-          //   padding: const EdgeInsets.only(top: 5, bottom: 5),
-          //   child: TextFormField(
-          //     maxLength: 20,
-          //     controller: _controller.controllerTextCidade,
-          //     decoration: InputDecoration(
-          //       labelText: "Cidade",
-          //       border: OutlineInputBorder(
-          //         borderSide: BorderSide(color: Colors.red, width: 5.0),
-          //       ),
-          //     ),
-          //     inputFormatters: [
-          //       LengthLimitingTextInputFormatter(20),
-          //     ],
-          //     validator: (String val) {
-          //       if (val == null || val.isEmpty) {
-          //         return "Por favor informe a cidade";
-          //       }
-          //       return null;
-          //     },
-          //   ),
-          // ),
-          // Container(
-          //   padding: const EdgeInsets.only(top: 5, bottom: 5),
-          //   child: TextFormField(
-          //     maxLength: 20,
-          //     controller: _controller.controllerTextBairro,
-          //     decoration: InputDecoration(
-          //       labelText: "Bairro",
-          //       border: OutlineInputBorder(
-          //         borderSide: BorderSide(color: Colors.red, width: 5.0),
-          //       ),
-          //     ),
-          //     inputFormatters: [
-          //       LengthLimitingTextInputFormatter(20),
-          //     ],
-          //     validator: (String val) {
-          //       if (val == null || val.isEmpty) {
-          //         return "Por favor informe o bairro";
-          //       }
-          //       return null;
-          //     },
-          //   ),
-          // ),
-          // Container(
-          //   padding: const EdgeInsets.only(top: 5, bottom: 5),
-          //   child: TextFormField(
-          //     maxLength: 30,
-          //     controller: _controller.controllerTextRua,
-          //     decoration: InputDecoration(
-          //       labelText: "Rua",
-          //       border: OutlineInputBorder(
-          //         borderSide: BorderSide(color: Colors.red, width: 5.0),
-          //       ),
-          //     ),
-          //     inputFormatters: [
-          //       LengthLimitingTextInputFormatter(30),
-          //     ],
-          //     validator: (String val) {
-          //       if (val == null || val.isEmpty) {
-          //         return "Por favor informe a rua";
-          //       }
-          //       return null;
-          //     },
-          //   ),
-          // ),
-          // Container(
-          //   padding: const EdgeInsets.only(top: 5, bottom: 5),
-          //   child: TextFormField(
-          //     maxLength: 5,
-          //     controller: _controller.controllerTextNumeroCasa,
-          //     decoration: InputDecoration(
-          //       labelText: "Numero",
-          //       border: OutlineInputBorder(
-          //         borderSide: BorderSide(color: Colors.red, width: 5.0),
-          //       ),
-          //     ),
-          //     keyboardType: TextInputType.number,
-          //     inputFormatters: [
-          //       LengthLimitingTextInputFormatter(5),
-          //     ],
-          //     validator: (String val) {
-          //       if (val == null || val.isEmpty) {
-          //         return "Por favor informe o numero";
-          //       }
-          //       return null;
-          //     },
-          //   ),
-          // ),
           Padding(
-            padding: const EdgeInsets.only(top: 10, bottom: 20),
-            child: Align(
-              alignment: Alignment.topRight,
-              child: OutlinedButton(
-                  child: Icon(
-                    Icons.arrow_circle_right_rounded,
-                    size: 45,
+            padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
+            child: Center(
+              child: DecoratedBox(
+                decoration: ShapeDecoration(
+                  color: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      width: 10.0,
+                      style: BorderStyle.solid,
+                      color: Colors.green,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
-                  onPressed: () async {
-                    if (_controller.formKey.currentState.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text("Anúncio publicado com sucesso")));
-                      widget.sendService(
-                        marca: _controller.controllerTextcategoria.text = marca,
-                        modelo: _controller.controllerTextespecialidade.text =
-                            modelo,
-                        ano: _controller.controllerTexttempo.text = ano,
-                        valor: _controller.controllerTextvalor.text,
-                        idCar: _controller.controllerTextIdCar.text =
-                            await idGenerator(),
-                        // rua: _controller.controllerTextRua.text,
-                        // numeroCasa: _controller.controllerTextNumeroCasa.text,
-                        // estado: _controller.controllerTextEstado.text =
-                        //     estado,
-                        // cidade: _controller.controllerTextCidade.text,
-                        userId: await _getCurrentUser(),
-                      );
-                      Navigator.pop(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
-                      );
-                    }
-                  }),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10.0, left: 10.0),
+                  child: DropdownButton<String>(
+                    value: marca,
+                    icon: const Icon(Icons.arrow_drop_down),
+                    elevation: 16,
+                    style: const TextStyle(color: Colors.black),
+                    underline: Container(
+                      height: 2,
+                      color: Colors.black,
+                    ),
+                    items: items
+                        .map((item) => DropdownMenuItem(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: GoogleFonts.lato(
+                                  fontSize: 24.0, color: Colors.black),
+                            )))
+                        .toList(),
+                    onChanged: (item) => setState(() => marca = item),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
+            child: Center(
+              child: DecoratedBox(
+                decoration: ShapeDecoration(
+                  color: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      width: 10.0,
+                      style: BorderStyle.solid,
+                      color: Colors.green,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10.0, left: 10.0),
+                  child: DropdownButton<String>(
+                    value: modelo,
+                    icon: const Icon(Icons.arrow_drop_down),
+                    elevation: 16,
+                    style: const TextStyle(color: Colors.black),
+                    underline: Container(
+                      height: 2,
+                      color: Colors.black,
+                    ),
+                    items: items2
+                        .map((item2) => DropdownMenuItem(
+                            value: item2,
+                            child: Text(
+                              item2,
+                              style: GoogleFonts.lato(
+                                  fontSize: 24.0, color: Colors.black),
+                            )))
+                        .toList(),
+                    onChanged: (item2) => setState(() => modelo = item2),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
+            child: Center(
+              child: DecoratedBox(
+                decoration: ShapeDecoration(
+                  color: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      width: 10.0,
+                      style: BorderStyle.solid,
+                      color: Colors.green,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10.0, left: 10.0),
+                  child: DropdownButton<String>(
+                    value: ano,
+                    icon: const Icon(Icons.arrow_drop_down),
+                    elevation: 16,
+                    style: const TextStyle(color: Colors.black),
+                    underline: Container(
+                      height: 2,
+                      color: Colors.black,
+                    ),
+                    items: items3
+                        .map((item3) => DropdownMenuItem(
+                            value: item3,
+                            child: Text(
+                              item3,
+                              style: GoogleFonts.lato(
+                                  fontSize: 24.0, color: Colors.black),
+                            )))
+                        .toList(),
+                    onChanged: (item3) => setState(() => ano = item3),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 15, left: 15, top: 10),
+            child: Center(
+              child: DecoratedBox(
+                decoration: ShapeDecoration(
+                  color: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      width: 10.0,
+                      style: BorderStyle.solid,
+                      color: Colors.green,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10.0, left: 10.0),
+                  child: DropdownButton<String>(
+                    value: estado,
+                    icon: const Icon(Icons.arrow_drop_down),
+                    elevation: 16,
+                    style: const TextStyle(color: Colors.black),
+                    underline: Container(
+                      height: 2,
+                      color: Colors.black,
+                    ),
+                    items: items4
+                        .map((item4) => DropdownMenuItem(
+                            value: item4,
+                            child: Text(
+                              item4,
+                              style: GoogleFonts.lato(
+                                  fontSize: 24.0, color: Colors.black),
+                            )))
+                        .toList(),
+                    onChanged: (item4) => setState(() => estado = item4),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: TextFormField(
+                controller: _controller.controllerTextvalor,
+                decoration: InputDecoration(
+                  labelStyle: TextStyle(
+                      color: Colors.white, backgroundColor: Color(0xFF001B43)),
+                  prefixText: 'R\$ ',
+                  labelText: "Preço R\$",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: Colors.red, width: 5.0),
+                  ),
+                ),
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(11),
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                onFieldSubmitted: (price) {
+                  final formattedPrice = numFormat.format(double.parse(price));
+                  debugPrint('Formatted $formattedPrice');
+                  _controller.controllerTextvalor.value = TextEditingValue(
+                    text: formattedPrice,
+                    selection:
+                        TextSelection.collapsed(offset: formattedPrice.length),
+                  );
+                },
+                validator: (String val) {
+                  if (val == null || val.isEmpty) {
+                    return "Por favor informe o preço";
+                  }
+                  return null;
+                },
+              ),
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(top: 10, bottom: 20, right: 15, left: 15),
+            child: Center(
+              child: Container(
+                width: 250,
+                child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      shadowColor: Colors.lightGreenAccent,
+                      elevation: 5,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Icon(Icons.check_circle,
+                            size: 45, color: Color(0xFF001B43)),
+                        Text(
+                          "Concluir (cadastrar veículo)",
+                          style: GoogleFonts.lato(
+                              color: Color(0xFF001B43),
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ],
+                    ),
+                    onPressed: () async {
+                      if (_controller.formKey.currentState.validate()) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("Anúncio publicado com sucesso")));
+                        widget.sendService(
+                          marca: _controller.controllerTextcategoria.text =
+                              marca,
+                          modelo: _controller.controllerTextespecialidade.text =
+                              modelo,
+                          ano: _controller.controllerTexttempo.text = ano,
+                          valor: _controller.controllerTextvalor.text,
+                          idCar: _controller.controllerTextIdCar.text =
+                              await idGenerator(),
+                          // rua: _controller.controllerTextRua.text,
+                          // numeroCasa: _controller.controllerTextNumeroCasa.text,
+                          // estado: _controller.controllerTextEstado.text =
+                          //     estado,
+                          // cidade: _controller.controllerTextCidade.text,
+                          userId: await _getCurrentUser(),
+                        );
+                        Navigator.pop(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomePage()),
+                        );
+                      }
+                    }),
+              ),
             ),
           ),
         ],
@@ -566,86 +1032,3 @@ class _AddCarComposerState extends State<AddCarComposer> {
     );
   }
 }
-
-/*
-
-class Todo {
-  final int id;
-
-  Todo({this.id});
-}
-
-Future<Todo> _estados() async {
-  var url =
-      'https://servicodados.ibge.gov.br/api/v1/localidades/estados/11|12|13|14|15|16|17|21|22|23|24|25|26|27|28|29|31|32|33|35|41|42|43|50|51|52|53';
-  var response = await http.get(Uri.parse(url));
-  var json = jsonDecode(response.body);
-  var todo = Todo(id: json['id']);
-  return todo;
-}
- */
-/*
-          Container(
-            child: TextFormField(
-              controller: _controller.controllerTextcategoria,
-              decoration: InputDecoration(
-                labelText: "Categoria. Ex: Mãos/Pés, Cabelo...",
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red, width: 5.0),
-                ),
-              ),
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(25),
-              ],
-              validator: (String val) {
-                if (val == null || val.isEmpty) {
-                  return "Por favor informe sua Categoria";
-                }
-                return null;
-              },
-            ),
-          ),
-
-          Container(
-            child: TextFormField(
-              controller: _controller.controllerTextespecialidade,
-              decoration: InputDecoration(
-                labelText: "Especialidade. Ex: Manucure e pedicur ...",
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red, width: 5.0),
-                ),
-              ),
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(25),
-              ],
-              validator: (String val) {
-                if (val == null || val.isEmpty) {
-                  return "Por favor informe sua especialidade";
-                }
-                return null;
-              },
-            ),
-          ),
-          Container(
-            child: TextFormField(
-              maxLength: 3,
-              controller: _controller.controllerTexttempo,
-              decoration: InputDecoration(
-                labelText: "Tempo em minutos(Ex: 30, 40, 60...)",
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red, width: 5.0),
-                ),
-              ),
-              keyboardType: TextInputType.number,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(3),
-              ],
-              validator: (String val) {
-                if (val == null || val.isEmpty) {
-                  return "Por favor informe o tempo";
-                }
-                return null;
-              },
-            ),
-          ),
-*/

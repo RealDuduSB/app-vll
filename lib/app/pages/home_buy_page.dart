@@ -50,7 +50,6 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
 
   @override
   void dispose() {
-    // Clean up the focus node when the Form is disposed.
     myFocusNode.dispose();
     myFocusNode1.dispose();
     myFocusNode2.dispose();
@@ -186,7 +185,6 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                               myFocusNode.requestFocus();
                             }
                           },
-                          // controller:  textEditingController.toString().toUpperCase(),
                           textAlign: TextAlign.center,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(1),
@@ -662,7 +660,7 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                                             children: [
                                               Text(
                                                   "Modelo: " +
-                                                      docs[index].get('marca'),
+                                                      docs[index].get('modelo'),
                                                   style: GoogleFonts.lato(
                                                     fontSize: 14,
                                                     color: Colors.black,
