@@ -13,69 +13,44 @@ class CarDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF001B43),
-      drawer: Drawer(
-        backgroundColor: Colors.lightGreenAccent,
-        child: ListView(
-          children: <Widget>[
-            ListTile(
-              tileColor: Colors.green,
-              leading: Icon(
-                Icons.settings,
-                color: Colors.black,
-                size: 15,
-              ),
-              title: Column(
-                children: [
-                  Text(
-                    "Nome: ",
-                    style: GoogleFonts.lato(fontSize: 15, color: Colors.black),
-                  ),
-                  Text(
-                    "Email: ",
-                    style: GoogleFonts.lato(fontSize: 15, color: Colors.black),
-                  ),
-                ],
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              leading:
-                  Icon(Icons.add_to_home_screen_outlined, color: Colors.black),
-              title: Text(
-                "Entrar",
-                style: GoogleFonts.lato(fontSize: 27, color: Colors.black),
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ChoiceScreen()),
-                );
-              },
-            ),
-            Divider(),
-          ],
-        ),
-      ),
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-        actions: [
-          Row(
-            children: [
-              IconButton(onPressed: () {}, icon: Icon(Icons.share)),
-            ],
-          ),
-        ],
-      ),
+      // title: StreamBuilder(
+      //   stream: FirebaseFirestore.instance
+      //       .collection('services')
+      //       .where(FieldPath.documentId, isEqualTo: docSnapshot)
+      //       .snapshots(),
+      //   builder: (context, snapshot) {
+      //     if (snapshot.data == null) return CircularProgressIndicator();
+      //     return ListView.builder(
+      //       itemCount: snapshot.data.docs.length,
+      //       itemBuilder: (context, index) {
+      //         List<DocumentSnapshot> docs = snapshot.data.docs.toList();
+      //         return Text(
+      //           docs[index].get('marca'),
+      //           style: GoogleFonts.lato(
+      //             fontSize: 10,
+      //             color: Colors.black,
+      //           ),
+      //         );
+      //       },
+      //     );
+      //   },
+      // ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 30.0),
-            child: Image.asset(
-              "images/valluulogobranco.png",
-              height: 100,
-              fit: BoxFit.cover,
+            padding: const EdgeInsets.only(top: 20, left: 10),
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.arrow_circle_left,
+                  size: 32,
+                  color: Colors.green,
+                ),
+              ),
             ),
           ),
           Expanded(
@@ -91,11 +66,11 @@ class CarDetailsPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   List<DocumentSnapshot> docs = snapshot.data.docs.toList();
                   return Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.only(left: 10, right: 10),
                     child: Container(
                       width: 180,
                       decoration: BoxDecoration(
-                        color: Color(0xFF008500),
+                        color: Colors.green,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Padding(
@@ -143,7 +118,7 @@ class CarDetailsPage extends StatelessWidget {
                                       children: [
                                         Text(
                                             "Modelo: " +
-                                                docs[index].get('marca'),
+                                                docs[index].get('modelo'),
                                             style: GoogleFonts.lato(
                                               fontSize: 14,
                                               color: Colors.black,
@@ -217,7 +192,7 @@ class RowFormatters extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Color(0xFF008500),
+        color: Colors.green,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Center(

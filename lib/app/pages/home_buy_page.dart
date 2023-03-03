@@ -619,16 +619,13 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                             height: 130,
                             decoration: BoxDecoration(
                               color: Colors.green,
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(5),
                             ),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
+                                Align(
+                                  alignment: Alignment.bottomLeft,
                                   child: Image.asset("images/car_null.png",
                                       height: double.maxFinite),
                                 ),
@@ -636,7 +633,8 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                                   padding: const EdgeInsets.only(left: 80),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
                                     children: [
                                       Column(
                                         mainAxisAlignment:
@@ -647,24 +645,14 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
-                                                "Marca: " +
-                                                    docs[index].get('marca'),
+                                                docs[index].get('marca') +
+                                                    " - " +
+                                                    docs[index].get('modelo'),
                                                 style: GoogleFonts.lato(
                                                   fontSize: 14,
                                                   color: Colors.black,
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                  "Modelo: " +
-                                                      docs[index].get('modelo'),
-                                                  style: GoogleFonts.lato(
-                                                    fontSize: 14,
-                                                    color: Colors.black,
-                                                  )),
                                             ],
                                           ),
                                         ],
