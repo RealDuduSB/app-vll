@@ -42,12 +42,19 @@ class _RegistrarState extends State<Registrar> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            "Registrar",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 25),
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 5, bottom: 10),
+                              child: Text(
+                                "Registrar",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 25),
+                              ),
+                            ),
                           ),
                           TextFormField(
                             controller: _controller.displayName,
