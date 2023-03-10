@@ -119,7 +119,9 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
         actions: [
           Row(
             children: [
-              IconButton(onPressed: () {}, icon: Icon(Icons.favorite)),
+              IconButton(onPressed: () {
+                
+              }, icon: Icon(Icons.map_outlined)),
             ],
           ),
         ],
