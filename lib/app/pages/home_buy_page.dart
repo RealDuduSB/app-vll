@@ -6,6 +6,10 @@ import 'package:sbs_app/app/pages/car_find_page.dart';
 import 'package:sbs_app/app/pages/choice_page.dart';
 import 'package:flutter/services.dart';
 import 'package:sbs_app/app/pages/home_buy_page_2.dart';
+import 'package:get/get.dart';
+
+import '../controller/service_controller.dart';
+import 'map_page.dart';
 
 class HomeBuyPage extends StatefulWidget {
   final bool isActive;
@@ -13,6 +17,7 @@ class HomeBuyPage extends StatefulWidget {
   final Icon inactiveIicon;
 
   final void Function() onTap;
+
   const HomeBuyPage({
     Key key,
     this.isActive,
@@ -29,6 +34,8 @@ CollectionReference services =
     FirebaseFirestore.instance.collection('services');
 
 class _HomeBuyPageState extends State<HomeBuyPage> {
+  final ServiceController serviceController = Get.put(ServiceController());
+
   FocusNode myFocusNode;
   FocusNode myFocusNode1;
   FocusNode myFocusNode2;
@@ -67,8 +74,8 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
   }
 
   Widget build(BuildContext context) {
-    bool isActive = false;
-    bool switchValue = true;
+    // bool isActive = false;
+    // bool switchValue = true;
     return Scaffold(
       backgroundColor: Color(0xFF001B43),
       drawer: Drawer(
@@ -119,9 +126,14 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
         actions: [
           Row(
             children: [
-              IconButton(onPressed: () {
-                
-              }, icon: Icon(Icons.map_outlined)),
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MapaWidget()),
+                    );
+                  },
+                  icon: Icon(Icons.map_outlined)),
             ],
           ),
         ],
@@ -591,11 +603,10 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
             ),
             Expanded(
                 child: StreamBuilder(
-              stream: services.snapshots(),
+              stream: serviceController.carsStream,
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.data == null) return CircularProgressIndicator();
-
-                List<DocumentSnapshot> docs = snapshot.data.docs.toList();
+                List<QueryDocumentSnapshot> docs = snapshot.data.docs.toList();
 
                 return Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -608,13 +619,7 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                           onTap: () async {
                             print(docs[index].id.toString());
                             String docId = docs[index].id.toString();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => CarDetailsPage(
-                                        docSnapshot: docId,
-                                      )),
-                            );
+                            Get.to(CarDetailsPage(docSnapshot: docId));
                           },
                           child: Container(
                             width: 180,
@@ -628,8 +633,10 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                               children: [
                                 Align(
                                   alignment: Alignment.bottomLeft,
-                                  child: Image.asset("images/car_null.png",
-                                      height: double.maxFinite),
+                                  child: Image.asset(
+                                    "images/car_null.png",
+                                    height: double.maxFinite,
+                                  ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 80),
@@ -663,25 +670,29 @@ class _HomeBuyPageState extends State<HomeBuyPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceAround,
                                         children: [
-                                          Row(children: [
-                                            Text(
+                                          Row(
+                                            children: [
+                                              Text(
                                                 "Ano: " +
                                                     docs[index].get('ano'),
                                                 style: GoogleFonts.lato(
                                                   fontSize: 14,
                                                   color: Colors.black,
-                                                )),
-                                          ]),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                           Row(
                                             children: [
                                               Text(
-                                                  "R\$ " +
-                                                      docs[index].get('valor') +
-                                                      ",00",
-                                                  style: GoogleFonts.lato(
-                                                    fontSize: 14,
-                                                    color: Colors.black,
-                                                  )),
+                                                "R\$ " +
+                                                    docs[index].get('valor') +
+                                                    ",00",
+                                                style: GoogleFonts.lato(
+                                                  fontSize: 14,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ],

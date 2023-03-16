@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sbs_app/app/pages/chat_page.dart';
-import 'package:sbs_app/app/pages/myservices_page.dart';
 import 'package:sbs_app/app/pages/user_page.dart';
+import '../controller/service_controller.dart';
 import 'add_car_page.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
   final User user;
@@ -19,6 +19,8 @@ CollectionReference services =
     FirebaseFirestore.instance.collection('services');
 
 class _HomePageState extends State<HomePage> {
+  final ServiceController serviceController = Get.put(ServiceController());
+
   final pageViewController = PageController();
 
   Future getServices() async {

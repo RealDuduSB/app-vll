@@ -6,6 +6,7 @@ import 'package:sbs_app/app/pages/home_page.dart';
 import 'package:sbs_app/app/pages/login_page.dart';
 import 'package:sbs_app/app/pages/myservices_page.dart';
 import 'package:sbs_app/app/pages/user_page.dart';
+import 'package:get/get.dart';
 
 import '../pages/chatlist.dart';
 import '../pages/choice_page.dart';
@@ -14,7 +15,7 @@ import '../pages/home_buy_page.dart';
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       theme: ThemeData(
         textSelectionTheme: TextSelectionThemeData(
           cursorColor: Colors.black,
@@ -23,18 +24,18 @@ class MyApp extends StatelessWidget {
         ),
       ),
       initialRoute: '/homebuy',
-      routes: {
-        '/choices': (context) => ChoiceScreen(),
-        '/homebuy': (context) => HomeBuyPage(),
-        '/home': (context) => HomePage(),
-        '/login': (context) => Login(),
-        '/addService': (context) => AddServicePage(),
-        '/meusServicos': (context) => MeusServicos(),
-        '/chat': (context) => ChatField(),
-        '/chatlist': (context) => ChatList(),
-        '/userpage': (context) => UserPage(),
-        '/cardetail': (context) => CarDetailsPage(),
-      },
+      getPages: [
+        GetPage(name: '/choices', page: () => ChoiceScreen()),
+        GetPage(name: '/homebuy', page: () => HomeBuyPage()),
+        GetPage(name: '/home', page: () => HomePage()),
+        GetPage(name: '/login', page: () => Login()),
+        GetPage(name: '/addService', page: () => AddServicePage()),
+        GetPage(name: '/meusServicos', page: () => MeusServicos()),
+        GetPage(name: '/chat', page: () => ChatField()),
+        GetPage(name: '/chatlist', page: () => ChatList()),
+        GetPage(name: '/userpage', page: () => UserPage()),
+        GetPage(name: '/cardetail', page: () => CarDetailsPage()),
+      ],
       debugShowCheckedModeBanner: false,
     );
   }

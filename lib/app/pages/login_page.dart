@@ -4,6 +4,7 @@ import 'register_page.dart';
 import 'home_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controller/login_controller.dart';
+import 'package:get/get.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -194,7 +195,7 @@ class _LoginState extends State<Login> {
                       ),
                       onPressed: () async {
                         if (_controller.formKey.currentState.validate()) {
-                          _signinWithEmailPassword();
+                          _controller.signinWithEmailPassword();
                         }
                       },
                     ),
@@ -206,28 +207,6 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
-  }
-
-  void _signinWithEmailPassword() async {
-    try {
-      final User user = (await _controller.auth.signInWithEmailAndPassword(
-              email: _controller.emailController.text,
-              password: _controller.senhaController.text))
-          .user;
-      if (!user.emailVerified) {
-        await user.sendEmailVerification();
-      }
-      Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-        return HomePage(
-          user: user,
-        );
-      }));
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Erro ao efetuar o login"),
-      ));
-      print(e);
-    }
   }
 }
 

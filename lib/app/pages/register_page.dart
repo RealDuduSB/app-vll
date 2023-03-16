@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controller/register_controller.dart';
+import 'package:get/get.dart';
 
 class Registrar extends StatefulWidget {
   @override
@@ -191,12 +192,7 @@ class _RegistrarState extends State<Registrar> {
         await user.updateProfile(displayName: _controller.displayName.text);
 
         final user1 = _controller.auth.currentUser;
-        Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (context) {
-          return HomePage(
-            user: user1,
-          );
-        }));
+        Get.offAll(() => HomePage(user: user1));
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
